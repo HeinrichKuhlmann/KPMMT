@@ -1,0 +1,29 @@
+<h2 style="color:#666">Welcome to 'Click the Balls'</h2>
+<input type="button" id="authorizeButton" ng-show="!isAuthorized" value="Authorize" />
+
+<div ng-show="isAuthorized">
+	<div style="position:relative; border-top:1px solid #ddd; border-bottom: 1px solid #ddd; margin:5px 0; padding: 5px;">
+		<span style="font-zize:24px; color: #666; font-weight:bold">Alle Spieler:</span>
+		<img class="collaborator" ng-class="c.isMe && 'is-me'" ng-repeat="c in collaborators" ng-src="{{c.photoUrl}}" ng-style="{borderBottom : '8px solid ' + c.color}" ng-mouseover="showName(c.displayName)" ng-mouseout="showName('')" >
+		
+		<span ng-show="who !=''"style="clear:both;bottom: -15px; right:0px; position: absolute; font-size:14px; padding: 0 5px; background-color: #000; color: white;">
+			Spieler: {{who}}
+		</span>
+		<div style="clear:both"></div>
+	</div>
+	<div ng-show="!started">
+		<button ng-show="!isStarting" ng-click="start()">Start Game!</button>
+		<div ng-show="isStarting" style="color:#666">
+			<h1>Game starts: {{isStartingIn}} Seconds!</h1>
+			<span>prepare your clickfinger!</span>
+		</div>
+	</div>
+	
+	<div ng-show="started" class="boundingBox" ng-load="init()">
+
+	
+				   <div class="circle"
+						ng-repeat="(key, shape) in shapes" ng-click="remove(key, shape)"
+					ng-style="{ 'backgroundColor':shape.color, 'left':shape.x+'px', 'top':shape.y+'px' }"></div>
+	</div>
+</div>
